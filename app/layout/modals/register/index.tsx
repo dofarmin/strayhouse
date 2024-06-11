@@ -57,7 +57,7 @@ const RegisterModal = () => {
   const bodyContent = useMemo(
     () => (
       <div className="flex flex-col gap-4">
-        <Heading title="Welcome to Airbnb" subtitle="Create an account" />
+        <Heading title="Welcome to Stray House" subtitle="Create an account" />
         <Input
           required
           id="email"
