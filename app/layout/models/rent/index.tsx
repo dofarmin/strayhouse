@@ -7,9 +7,9 @@ import Heading from "@/app/components/heading";
 import ImageUpload from "@/app/components/image-upload";
 import Input from "@/app/components/input";
 import Map from "@/app/components/map";
-import Modal from "@/app/components/modal";
+import Model from "@/app/components/model";
 import { categories } from "@/app/constant";
-import useRentModal from "@/app/hooks/useRentModal";
+import useRentModel from "@/app/hooks/useRentModel";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -26,9 +26,9 @@ enum STEPS {
   PRICE = 5,
 }
 
-const RentModal = () => {
+const RentModel = () => {
   const router = useRouter();
-  const rentModal = useRentModal();
+  const rentModel = useRentModel();
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -92,7 +92,7 @@ const RentModal = () => {
           router.refresh();
           reset();
           setStep(STEPS.CATEGORY);
-          rentModal.onClose();
+          rentModel.onClose();
         })
         .catch((err) => {
           let error = err.response.data;
@@ -105,7 +105,7 @@ const RentModal = () => {
           setIsLoading(false);
         });
     },
-    [step, router, reset, rentModal]
+    [step, router, reset, rentModel]
   );
 
   const actionLabel = useMemo(() => {
@@ -263,13 +263,13 @@ const RentModal = () => {
   ]);
 
   return (
-    <Modal
+    <Model
       body={bodyContent}
       disabled={isLoading}
       title="stray house"
       actionLabel={actionLabel}
-      isOpen={rentModal.isOpen}
-      onClose={rentModal.onClose}
+      isOpen={rentModel.isOpen}
+      onClose={rentModel.onClose}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
@@ -277,4 +277,4 @@ const RentModal = () => {
   );
 };
 
-export default RentModal;
+export default RentModel;

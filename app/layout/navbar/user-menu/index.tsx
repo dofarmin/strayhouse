@@ -4,11 +4,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../../../components/avatar";
 import UserMenuItem from "./menu-item";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModel from "@/app/hooks/useRegisterModel";
+import useLoginModel from "@/app/hooks/useLoginModel";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
-import useRentModal from "@/app/hooks/useRentModal";
+import useRentModel from "@/app/hooks/useRentModel";
 import { useRouter } from "next/navigation";
 
 interface IUserMenuProps {
@@ -17,9 +17,9 @@ interface IUserMenuProps {
 
 const UserMenu = ({ currentUser }: IUserMenuProps) => {
   const router = useRouter();
-  const registerModal = useRegisterModal();
-  const loginModal = useLoginModal();
-  const rentModal = useRentModal();
+  const registerModel = useRegisterModel();
+  const loginModel = useLoginModel();
+  const rentModel = useRentModel();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
 
   const onRent = useCallback(() => {
     if (!currentUser) {
-      return loginModal.onOpen();
+      return loginModel.onOpen();
     }
-    rentModal.onOpen();
-  }, [currentUser, loginModal, rentModal]);
+    rentModel.onOpen();
+  }, [currentUser, loginModel, rentModel]);
 
   return (
     <div className="relative ">
@@ -100,7 +100,7 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
                   label="My Properties"
                 />
                 <UserMenuItem
-                  onClick={rentModal.onOpen}
+                  onClick={rentModel.onOpen}
                   label="Strayhouse"
                 />
                 <hr />
@@ -108,8 +108,8 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
               </>
             ) : (
               <>
-                <UserMenuItem onClick={loginModal.onOpen} label="Login" />
-                <UserMenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <UserMenuItem onClick={loginModel.onOpen} label="Login" />
+                <UserMenuItem onClick={registerModel.onOpen} label="Sign up" />
               </>
             )}
           </div>

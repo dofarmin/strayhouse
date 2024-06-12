@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../button";
 
-interface IModalProps {
+interface IModelProps {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
@@ -17,7 +17,7 @@ interface IModalProps {
   secondaryActionLabel?: string;
 }
 
-const Modal = ({
+const Model = ({
   isOpen,
   onClose,
   onSubmit,
@@ -28,11 +28,11 @@ const Modal = ({
   disabled,
   secondaryAction,
   secondaryActionLabel,
-}: IModalProps) => {
-  const [showModal, setShowModal] = useState(isOpen);
+}: IModelProps) => {
+  const [showModel, setShowModel] = useState(isOpen);
 
   useEffect(() => {
-    setShowModal(isOpen);
+    setShowModel(isOpen);
   }, [isOpen]);
 
   const handleClose = useCallback(() => {
@@ -40,7 +40,7 @@ const Modal = ({
       return;
     }
 
-    setShowModal(false);
+    setShowModel(false);
     setTimeout(() => {
       onClose();
     }, 300);
@@ -78,7 +78,7 @@ const Modal = ({
         <div
           className={cn(
             "duration-300 h-full",
-            showModal
+            showModel
               ? "translate-y-0 opacity-100"
               : "translate-y-full opacity-0"
           )}
@@ -119,4 +119,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default Model;

@@ -9,7 +9,7 @@ import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import Container from "@/app/components/container";
 import ListingHead from "@/app/components/listing/head";
 import ListingInfo from "@/app/components/listing/info";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModel from "@/app/hooks/useLoginModel";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -32,7 +32,7 @@ const ListingDetail = ({
   currentUser,
   reservations = [],
 }: IListingDetailProps) => {
-  const loginModal = useLoginModal();
+  const loginModel = useLoginModel();
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
@@ -57,7 +57,7 @@ const ListingDetail = ({
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
-      return loginModal.onOpen();
+      return loginModel.onOpen();
     }
     setLoading(true);
     axios
@@ -78,7 +78,7 @@ const ListingDetail = ({
         toast.error("Something went wrong!");
       })
       .finally(() => setLoading(false));
-  }, [currentUser, loginModal, dateRange, listing, totalPrice, router]);
+  }, [currentUser, loginModel, dateRange, listing, totalPrice, router]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {

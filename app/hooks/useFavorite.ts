@@ -1,7 +1,7 @@
 import { MouseEvent, useState } from "react";
 import axios from "axios";
 import { SafeUser } from "../types";
-import useLoginModal from "./useLoginModal";
+import useLoginModel from "./useLoginModel";
 import { useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
 
@@ -14,13 +14,13 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const [hasFavorited, setFavorited] = useState<boolean>(
     (currentUser?.favoriteIds || []).includes(listingId)
   );
-  const loginModal = useLoginModal();
+  const loginModel = useLoginModel();
 
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
 
-      if (!currentUser) return loginModal.onOpen();
+      if (!currentUser) return loginModel.onOpen();
 
       try {
         let request;
@@ -38,7 +38,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         setFavorited((prev) => !prev);
       }
     },
-    [currentUser, loginModal, listingId, hasFavorited]
+    [currentUser, loginModel, listingId, hasFavorited]
   );
 
   return {

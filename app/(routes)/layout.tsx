@@ -1,12 +1,12 @@
 import { Nunito } from "next/font/google";
 import Navbar from "@/app/layout/navbar";
-import RegisterModal from "@/app/layout/modals/register";
+import RegisterModel from "@/app/layout/models/register";
 import ToasterProvider from "@/app/providers/ToasterProvider";
-import LoginModal from "@/app/layout/modals/login";
+import LoginModel from "@/app/layout/models/login";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import RentModal from "@/app/layout/modals/rent";
+import RentModel from "@/app/layout/models/rent";
 import ClientOnly from "@/app/components/client-only";
-import SearchModal from "@/app/layout/modals/search";
+import SearchModel from "@/app/layout/models/search";
 import "../globals.css";
 
 export const metadata = {
@@ -29,10 +29,10 @@ export default async function RootLayout({
       <body className={font.className} suppressHydrationWarning={true}>
         <ClientOnly>
           <ToasterProvider />
-          <LoginModal />
-          <RegisterModal />
-          <RentModal />
-          <SearchModal />
+          <LoginModel />
+          <RegisterModel />
+          <RentModel />
+          <SearchModel />
           <Navbar currentUser={currentUser} />
         </ClientOnly>
         <div className="pb-20 pt-28">{children}</div>

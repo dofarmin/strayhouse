@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
-interface LoginModalStore {
+interface SearchModelStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useLoginModal = create<LoginModalStore>((set) => ({
+const useSearchModel = create<SearchModelStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useLoginModal;
+export default useSearchModel;
