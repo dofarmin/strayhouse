@@ -23,7 +23,7 @@ const RegisterModel = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset, 
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
@@ -45,7 +45,7 @@ const RegisterModel = () => {
           reset();
         })
         .catch((err) => {
-          toast.error(err.response?.data ?? "Something went wrong!");
+          toast.error("Something went wrong! Check again");
         })
         .finally(() => {
           setIsLoading(false);

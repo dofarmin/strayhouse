@@ -42,6 +42,7 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
     if (!currentUser) {
       return loginModel.onOpen();
     }
+    // open rent modal
     rentModel.onOpen();
   }, [currentUser, loginModel, rentModel]);
 

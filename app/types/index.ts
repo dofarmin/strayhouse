@@ -9,7 +9,9 @@ export type SafeUser = Omit<
   emailVerified: string | null;
 };
 
-export type SafeListing = Omit<Listing, "createdAt" | "updatedAt"> & {
+export type SafeListing = Omit<
+Listing, "createdAt" | "updatedAt"
+> & {
   createdAt: string;
   updatedAt: string;
 };

@@ -60,16 +60,18 @@ const RentModel = () => {
   const imageSrcValue = watch("imageSrc");
 
   const Map = useMemo(
-    () => dynamic(() => import("@/app/components/map"), { ssr: false }),
+    () => dynamic(() => import("@/app/components/map"), 
+    { ssr: false }),
     [locationValue]
   );
 
   const setCustomValue = useCallback(
     (id: string, value: any) => {
       setValue(id, value, {
+        shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
-        shouldValidate: true,
+ 
       });
     },
     [setValue]

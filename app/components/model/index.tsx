@@ -75,6 +75,8 @@ const Model = ({
         onClick={stopClickEventBubling}
         className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto"
       >
+
+        {/* content */}
         <div
           className={cn(
             "duration-300 h-full",
@@ -96,6 +98,7 @@ const Model = ({
             <div className="relative p-6 flex-auto">{body}</div>
             <div className="flex flex-col gap-2 p-6">
               <div className="flex flex-row items-center gap-4 w-full">
+
                 {secondaryAction && secondaryActionLabel && (
                   <Button
                     outline
@@ -104,6 +107,7 @@ const Model = ({
                     onClick={handleSecondaryActionSubmit}
                   />
                 )}
+                
                 <Button
                   disabled={disabled}
                   label={actionLabel}

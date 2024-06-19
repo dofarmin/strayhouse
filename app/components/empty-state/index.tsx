@@ -16,6 +16,7 @@ const EmptyState = ({
   subTitle = "Try changing or removing some of your titles",
   showReset,
 }: IEmptyStateProps) => {
+  
   const router = useRouter();
 
   return (

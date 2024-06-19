@@ -49,6 +49,7 @@ const ListingCard = ({
     return data.price;
   }, [reservation, data.price]);
 
+  
   const reservationDate = useMemo(() => {
     if (!reservation) return null;
     const start = new Date(reservation.startDate);

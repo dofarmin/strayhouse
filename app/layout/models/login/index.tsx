@@ -34,12 +34,18 @@ const LoginModel = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = useCallback(
     (data) => {
+
       setIsLoading(true);
-      signIn("credentials", { ...data, redirect: false }).then((callback) => {
+
+      signIn("credentials", { 
+        ...data, redirect: false 
+      })
+      
+      .then((callback) => {
         setIsLoading(false);
 
         if (callback?.ok) {
-          toast.success("Logged in");
+          toast.success("Logged in !!");
           router.refresh();
           loginModel.onClose();
         }

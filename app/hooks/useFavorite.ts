@@ -4,7 +4,7 @@ import { SafeUser } from "../types";
 import useLoginModel from "./useLoginModel";
 import { useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
-
+import { useRouter } from "next/navigation";
 interface IUseFavorite {
   listingId: string;
   currentUser?: SafeUser | null;
@@ -15,7 +15,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     (currentUser?.favoriteIds || []).includes(listingId)
   );
   const loginModel = useLoginModel();
-
+  const router = useRouter();
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
@@ -33,8 +33,21 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
           setFavorited(true);
         }
         await request();
+        router.refresh();
+        if(!hasFavorited){
+
+          toast.success("sucess favorite");
+        }
+
+        else{
+
+          toast.success("unfavorite");
+        }
+
       } catch (error) {
+        
         toast.error("Something went wrong.");
+
         setFavorited((prev) => !prev);
       }
     },

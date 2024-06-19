@@ -10,6 +10,7 @@ interface ICountrySelectProps {
   onChange: (value: CountrySelectValue) => void;
 }
 const CountrySelect = ({ value, onChange }: ICountrySelectProps) => {
+
   const { getAll } = useCountries();
 
   return (
@@ -25,7 +26,9 @@ const CountrySelect = ({ value, onChange }: ICountrySelectProps) => {
             <div>{option.flag}</div>
             <div>
               {option.label},
-              <span className="text-neutral-500 ml-1 ">{option.region}</span>
+              <span className="text-neutral-600 ml-1 ">
+                {option.region}
+                </span>
             </div>
           </div>
         )}

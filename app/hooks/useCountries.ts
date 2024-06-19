@@ -12,7 +12,7 @@ const useCountries = () => {
   const getAll = () => formattedCountries;
 
   const getByValue = (value: string) =>
-    formattedCountries.find((c) => c.value === value);
+    formattedCountries.find((item) => item.value === value);
 
   return {
     getAll,
