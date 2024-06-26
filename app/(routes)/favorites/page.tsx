@@ -31,7 +31,9 @@ const FavoritesPage = async () => {
 
   return (
     <ClientOnly>
-      <Favorites currentUser={currentUser} listings={favorites} />
+      <Favorites 
+      currentUser={currentUser} 
+      listings={favorites} />
     </ClientOnly>
   );
 };

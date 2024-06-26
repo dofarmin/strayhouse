@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../button";
 
-interface IModelProps {
+interface IModalProps {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
@@ -17,7 +17,7 @@ interface IModelProps {
   secondaryActionLabel?: string;
 }
 
-const Model = ({
+const Modal = ({
   isOpen,
   onClose,
   onSubmit,
@@ -28,11 +28,11 @@ const Model = ({
   disabled,
   secondaryAction,
   secondaryActionLabel,
-}: IModelProps) => {
-  const [showModel, setShowModel] = useState(isOpen);
-
+}: IModalProps) => {
+  const [showModal, setShowModal] = useState(isOpen);
+// call back sẽ dc gọi lại  mỗi khi deps thay đổi  
   useEffect(() => {
-    setShowModel(isOpen);
+    setShowModal(isOpen);
   }, [isOpen]);
 
   const handleClose = useCallback(() => {
@@ -40,7 +40,7 @@ const Model = ({
       return;
     }
 
-    setShowModel(false);
+    setShowModal(false);
     setTimeout(() => {
       onClose();
     }, 300);
@@ -80,7 +80,7 @@ const Model = ({
         <div
           className={cn(
             "duration-300 h-full",
-            showModel
+            showModal
               ? "translate-y-0 opacity-100"
               : "translate-y-full opacity-0"
           )}
@@ -123,4 +123,4 @@ const Model = ({
   );
 };
 
-export default Model;
+export default Modal;

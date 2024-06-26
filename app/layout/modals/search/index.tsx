@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 import qs from "query-string";
 
 import { CountrySelectValue } from "@/app/types";
-import useSearchModel from "@/app/hooks/useSearchModel";
-import Model from "@/app/components/model";
+import useSearchModal from "@/app/hooks/useSearchModal";
+import Modal from "@/app/components/modal";
 import { formatISO } from "date-fns";
 import Heading from "@/app/components/heading";
 import CountrySelect from "@/app/components/country-select";
@@ -20,8 +20,8 @@ enum STEPS {
   INFO = 2,
 }
 
-const SearchModel = () => {
-  const searchModel = useSearchModel();
+const SearchModal = () => {
+  const searchModal = useSearchModal();
   const router = useRouter();
   const params = useSearchParams();
   const [step, setStep] = useState(STEPS.LOCATION);
@@ -82,7 +82,7 @@ const SearchModel = () => {
     );
 
     setStep(STEPS.LOCATION);
-    searchModel.onClose();
+    searchModal.onClose();
 
     router.push(url);
   }, [
@@ -94,7 +94,7 @@ const SearchModel = () => {
     roomCount,
     dateRange,
     guestCount,
-    searchModel,
+    searchModal,
     bathroomCount,
   ]);
 
@@ -171,12 +171,12 @@ const SearchModel = () => {
   }, [step, Map, location, dateRange, guestCount, roomCount, bathroomCount]);
 
   return (
-    <Model
+    <Modal
       title="Filters"
       actionLabel={actionLabel}
-      onClose={searchModel.onClose}
+      onClose={searchModal.onClose}
       onSubmit={onSubmit}
-      isOpen={searchModel.isOpen}
+      isOpen={searchModal.isOpen}
       secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
       secondaryActionLabel={secondaryActionLabel}
       body={bodyContent}
@@ -184,4 +184,4 @@ const SearchModel = () => {
   );
 };
 
-export default SearchModel;
+export default SearchModal;

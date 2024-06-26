@@ -4,11 +4,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../../../components/avatar";
 import UserMenuItem from "./menu-item";
-import useRegisterModel from "@/app/hooks/useRegisterModel";
-import useLoginModel from "@/app/hooks/useLoginModel";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
-import useRentModel from "@/app/hooks/useRentModel";
+import useRentModal from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
 
 interface IUserMenuProps {
@@ -17,9 +17,9 @@ interface IUserMenuProps {
 
 const UserMenu = ({ currentUser }: IUserMenuProps) => {
   const router = useRouter();
-  const registerModel = useRegisterModel();
-  const loginModel = useLoginModel();
-  const rentModel = useRentModel();
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const rentModal = useRentModal();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -40,11 +40,11 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
 
   const onRent = useCallback(() => {
     if (!currentUser) {
-      return loginModel.onOpen();
+      return loginModal.onOpen();
     }
     // open rent modal
-    rentModel.onOpen();
-  }, [currentUser, loginModel, rentModel]);
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
 
   return (
     <div className="relative ">
@@ -53,7 +53,7 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
           onClick={onRent}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-         stray house
+         upload your apartment
         </div>
         <div
           onClick={toggleOpen}
@@ -101,7 +101,7 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
                   label="My Properties"
                 />
                 <UserMenuItem
-                  onClick={rentModel.onOpen}
+                  onClick={rentModal.onOpen}
                   label="Strayhouse"
                 />
                 <hr />
@@ -109,8 +109,8 @@ const UserMenu = ({ currentUser }: IUserMenuProps) => {
               </>
             ) : (
               <>
-                <UserMenuItem onClick={loginModel.onOpen} label="Login" />
-                <UserMenuItem onClick={registerModel.onOpen} label="Sign up" />
+                <UserMenuItem onClick={loginModal.onOpen} label="Login" />
+                <UserMenuItem onClick={registerModal.onOpen} label="Sign up" />
               </>
             )}
           </div>

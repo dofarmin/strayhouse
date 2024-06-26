@@ -45,8 +45,8 @@ export default async function getReservations(
         updatedAt: reservation.listing.updatedAt.toISOString(),
       },
     }));
-  } catch (error) {
-    console.error(error);
-    return [];
+  } 
+  catch (error: any) {
+  throw new Error(error);
   }
 }

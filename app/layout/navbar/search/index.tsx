@@ -1,14 +1,14 @@
 "use client";
 
 import useCountries from "@/app/hooks/useCountries";
-import useSearchModel from "@/app/hooks/useSearchModel";
+import useSearchModal from "@/app/hooks/useSearchModal";
 import { differenceInDays } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import React, { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 
 const Search = () => {
-  const searchModel = useSearchModel();
+  const searchModal = useSearchModal();
   const params = useSearchParams();
   const { getByValue } = useCountries();
 
@@ -50,7 +50,7 @@ const Search = () => {
   }, [guestCount]);
   return (
     <div
-      onClick={searchModel.onOpen}
+      onClick={searchModal.onOpen}
       className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
     >
       <div className="flex flex-row items-center justify-between">

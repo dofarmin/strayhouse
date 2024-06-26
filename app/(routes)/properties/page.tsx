@@ -33,7 +33,9 @@ const PropertiesPage = async () => {
 
   return (
     <ClientOnly>
-      <Properties currentUser={currentUser} listings={properties} />
+      <Properties 
+      currentUser={currentUser} 
+      listings={properties} />
     </ClientOnly>
   );
 };

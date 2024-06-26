@@ -8,7 +8,7 @@ interface ClientOnlyProps {
 
 const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
   const [hasMounted, setHasMounted] = useState(false);
-
+// chỉ gọi callback 1 lần sau khi component mounted
   useEffect(() => {
     setHasMounted(true);
   }, []);

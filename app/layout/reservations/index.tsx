@@ -23,7 +23,9 @@ const Reservations = ({ reservations, currentUser }: IReservationsProps) => {
 
   const onCancel = useCallback(
     (id: string) => {
+
       setDeletingId(id);
+      
       axios
         .delete(`/api/reservations/${id}`)
         .then(() => {
@@ -44,7 +46,7 @@ const Reservations = ({ reservations, currentUser }: IReservationsProps) => {
     <Container>
       <Heading
         title="Reservations"
-        subtitle="Where you've been and where you're going"
+        subtitle="Booking on your properties"
       />
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservations.map((reservation) => (

@@ -35,13 +35,19 @@ export default async function getListings(
     if (locationValue) {
       query.locationValue = locationValue;
     }
+// ktra ngày không trùng với ngày thuê của người khác 
     if (startDate && endDate) {
       query.NOT = {
         reservation: {
           some: {
             OR: [
-              { endDate: { gte: startDate }, startDate: { lte: startDate } },
-              { startDate: { gte: endDate }, endDate: { lte: endDate } },
+              { endDate: { gte: startDate },
+                startDate: { lte: startDate } 
+              },
+              
+              { startDate: { gte: endDate },
+                endDate: { lte: endDate } 
+              },
             ],
           },
         },

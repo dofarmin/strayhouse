@@ -5,28 +5,28 @@ import React, { useCallback, useMemo, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Model from "@/app/components/model";
+import Modal from "@/app/components/modal";
 import Heading from "@/app/components/heading";
 import Input from "@/app/components/input";
 import toast from "react-hot-toast";
 import Button from "@/app/components/button";
-import useLoginModel from "@/app/hooks/useLoginModel";
-import useRegisterModel from "@/app/hooks/useRegisterModel";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
-const LoginModel = () => {
-  const registerModel = useRegisterModel();
-  const loginModel = useLoginModel();
-  const router = useRouter();
+const RegisterModal = () => {
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset, 
   } = useForm<FieldValues>({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -34,37 +34,42 @@ const LoginModel = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = useCallback(
     (data) => {
-
       setIsLoading(true);
 
-      signIn("credentials", { 
-        ...data, redirect: false 
-      })
-      
-      .then((callback) => {
-        setIsLoading(false);
-
-        if (callback?.ok) {
-          toast.success("Logged in !!");
-          router.refresh();
-          loginModel.onClose();
-        }
-        if (callback?.error) {
-          toast.error(callback.error);
-        }
-      });
+      axios
+        .post("/api/register", data)
+        .then(() => {
+          toast.success("User created!");
+          registerModal.onClose();
+          loginModal.onOpen();
+          reset();
+        })
+        .catch((err) => {
+          toast.error("Something went wrong! Check again");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     },
-    [router, loginModel]
+    [registerModal, loginModal, reset]
   );
 
   const bodyContent = useMemo(
     () => (
       <div className="flex flex-col gap-4">
-        <Heading title="Welcome back" subtitle="Login to your account!" />
+        <Heading title="Welcome to Stray House" subtitle="Create an account" />
         <Input
           required
           id="email"
           label="Email"
+          errors={errors}
+          disabled={isLoading}
+          register={register}
+        />
+        <Input
+          required
+          id="name"
+          label="Name"
           errors={errors}
           disabled={isLoading}
           register={register}
@@ -100,32 +105,32 @@ const LoginModel = () => {
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap-2">
-          <div>First time use Stray House?</div>
+          <div>Already have an account?</div>
           <div
             onClick={() => {
-              loginModel.onClose();
-              registerModel.onOpen();
+              registerModal.onClose();
+              loginModal.onOpen();
             }}
             className="text-stone-800 cursor-pointer hover:underline"
           >
-            Create an account
+            Log in
           </div>
         </div>
       </div>
     </div>
   );
   return (
-    <Model
+    <Modal
       onSubmit={handleSubmit(onSubmit)}
-      title="Login"
+      title="Register"
       actionLabel="Continue"
-      isOpen={loginModel.isOpen}
+      isOpen={registerModal.isOpen}
       disabled={isLoading}
-      onClose={loginModel.onClose}
+      onClose={registerModal.onClose}
       body={bodyContent}
       footer={footerContent}
     />
   );
 };
 
-export default LoginModel;
+export default RegisterModal;
